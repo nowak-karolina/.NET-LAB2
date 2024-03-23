@@ -12,12 +12,15 @@ namespace LAB2 {
 
     
             client = new HttpClient();
-            string call = "https://www.boredapi.com/api/activity/";
+            //string call = "https://www.boredapi.com/api/activity/";
+            string call = "https://dogapi.dog/api/v2/facts";
             string response = await client.GetStringAsync(call);
             Console.WriteLine(response);
 
-            ToDo todo = JsonSerializer.Deserialize<ToDo>(response);
-            Console.WriteLine(todo.ToString());
+            //ToDo test = JsonSerializer.Deserialize<ToDo>(response);
+            Facts facts = JsonSerializer.Deserialize<Facts>(response);
+            Console.WriteLine("-----------------\n");
+            Console.WriteLine(facts.ToString());
         }
     }
 }
