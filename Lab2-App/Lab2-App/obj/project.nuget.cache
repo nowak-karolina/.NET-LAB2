@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VrYbJA0z4U4Z1HgkUlFKrd5EtDBfo6AKvidqr00q8mZs+JRomKXsD6+YefLT7UME6MS2PVqpsFy5EVOJyLzy5w==",
+  "dgSpecHash": "R1akyeoFKCtAuV/YNXaQ84Z6AShJel4tjsWbQcQZ2nnrxXfWley1STWetWrzx7UIidhb87bn+KuWn6bpTB0Dng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Karolina\\Desktop\\MOJE\\STUDIA\\6 sem\\net i java\\.NET-LAB2\\Lab2-App\\Lab2-App\\Lab2-App.csproj",
+  "projectFilePath": "D:\\MOJE\\STUDIA\\6sem\\net java\\.NET-LAB2\\Lab2-App\\Lab2-App\\Lab2-App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Karolina\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Karolina\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

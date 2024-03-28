@@ -15,7 +15,11 @@ namespace App {
             client = new HttpClient();
             tododoDB = new ToDoDataBase();
             LoadData();
+            dataGridView1.AutoResizeColumns();
             type_input.SelectedIndex = 0;
+            typeFilter_comboBox.SelectedIndex = 0;
+            sorting_comboBox.SelectedIndex = 0;
+            data_textBox.Text = "";
         }
 
         private void getCall() {
@@ -48,7 +52,8 @@ namespace App {
             try {
                 json = JsonSerializer.Deserialize<ToDo>(response);
                 json_textBox.Text = json.ToString();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex) {
                 json_textBox.Text = "";
                 MessageBox.Show("Error: No activity found with the specified parameters", "No activities", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -142,23 +147,30 @@ namespace App {
         }
 
         private void sorting_comboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            //
+            typeFilter_comboBox.SelectedIndex = 0;
+
             if (sender is ComboBox) {
                 ComboBox comboBox = sender as ComboBox;
 
                 switch (comboBox.SelectedIndex) {
                     case 0:
-                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.accessibility).Reverse().ToList();
+                        LoadData();
                         break;
 
                     case 1:
-                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.participants).Reverse().ToList();
+                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.accessibility).Reverse().ToList();
                         break;
 
                     case 2:
-                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.price).Reverse().ToList();
+                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.participants).Reverse().ToList();
                         break;
 
                     case 3:
+                        dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.price).Reverse().ToList();
+                        break;
+
+                    case 4:
                         dataGridView1.DataSource = tododoDB.todos.OrderBy(s => s.key).Reverse().ToList();
                         break;
                 }
@@ -167,7 +179,7 @@ namespace App {
 
         private void remove_button_Click(object sender, EventArgs e) {
             foreach (DataGridViewRow row in dataGridView1.SelectedRows) {
-                if (row.DataBoundItem is ToDo toDo) {
+                if (row.DataBoundItem is ToDo toDo) { //Pobiera obiekt powi¹zany z danymi, który wype³ni³ wiersz.
                     tododoDB.todos.Remove(toDo);
                 }
             }
@@ -194,12 +206,19 @@ namespace App {
         }
 
         private void typeFilter_comboBox_SelectedIndexChanged(object sender, EventArgs e) {
+            sorting_comboBox.SelectedIndex= 0;
 
             if (sender is ComboBox) {
                 ComboBox comboBox = sender as ComboBox;
 
+
                 string chosen = comboBox.SelectedItem.ToString();
-                dataGridView1.DataSource = tododoDB.todos.Where(s => s.type == chosen).ToList();
+                if (chosen != "none") {
+                    dataGridView1.DataSource = tododoDB.todos.Where(s => s.type == chosen).ToList();
+                } else {
+                    LoadData();
+                }
+
 
                 /*
                 switch (comboBox.SelectedIndex) {
